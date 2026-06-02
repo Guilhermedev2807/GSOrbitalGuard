@@ -47,8 +47,6 @@ erDiagram
         int CidadeId FK
     }
     TB_OG_CIDADE ||--o{ TB_OG_SENSOR : "possui"
-
-
 🚀 Instruções para Execução e Acesso
 Pré-requisitos:
 SDK do .NET 9 instalado.
@@ -59,20 +57,20 @@ Passo a Passo para Executar Localmente:
 Clonar o repositório:
 
 Bash
-   git clone [https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git](https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git)
-   cd GSOrbitalGuard
+git clone [https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git](https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git)
+cd GSOrbitalGuard
 Configurar a Connection String:
-Abra o arquivo appsettings.json e configure suas credenciais de acesso ao banco de dados Oracle da FIAP ou SQL Server na propriedade DefaultConnection.
+Abra o arquivo appsettings.json e configure suas credenciais de acesso ao banco de dados Oracle da FIAP na propriedade DefaultConnection.
 
 Restaurar dependências e rodar as Migrations:
 
 Bash
-   dotnet restore
-   dotnet ef database update
+dotnet restore
+dotnet ef database update
 Executar a aplicação:
 
 Bash
-   dotnet run
+dotnet run
 A API iniciará localmente. O painel do Swagger (Interface de Testes) estará disponível no navegador.
 
 🧪 Exemplos de Teste das Rotas (Massa de Dados)
@@ -82,65 +80,66 @@ Você pode testar as rotas da API diretamente pela interface do Swagger ou utili
 Payload de Envio (JSON):
 
 JSON
-    {
-      "nome": "São Paulo",
-      "estado": "SP",
-      "riscoAtual": "Baixo"
-    }
-    ```
+{
+  "nome": "São Paulo",
+  "estado": "SP",
+  "riscoAtual": "Baixo"
+}
+2. Listar Cidades com seus Sensores (GET /api/Cidades)
+Exemplo de Resposta de Sucesso (200 OK):
 
-### 2. Listar Cidades com seus Sensores (`GET /api/Cidades`)
-* **Exemplo de Resposta de Sucesso (`200 OK`):**
-```json
-    [
-      {
-        "id": 1,
-        "nome": "São Paulo",
-        "estado": "SP",
-        "riscoAtual": "Baixo",
-        "sensores": []
-      }
+JSON
+[
+  {
+    "id": 1,
+    "nome": "São Paulo",
+    "estado": "SP",
+    "riscoAtual": "Baixo",
+    "sensores": []
+  }
+]
+3. Vincular um Sensor IoT a uma Cidade (POST /api/Sensores)
+Payload de Envio (JSON):
+
+JSON
+{
+  "tipo": "Pluviômetro (Sensor de Chuva)",
+  "localizacao": "Zona Leste - Marginais",
+  "cidadeId": 1
+}
+4. Tratamento de Entradas Inválidas (Validação)
+Caso o cliente envie uma requisição incompleta, a aplicação intercepta a chamada usando Data Annotations e retorna um erro 400 Bad Request explicativo:
+
+Exemplo de Resposta de Erro:
+
+JSON
+{
+  "type": "[https://tools.ietf.org/html/rfc9110#section-15.5.1](https://tools.ietf.org/html/rfc9110#section-15.5.1)",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "Localizacao": [
+      "A localização do sensor é obrigatória."
     ]
-    ```
+  }
+}
+🌍 Alinhamento com as ODS da ONU
+O OrbitalGuard foi concebido para cumprir com metas globais de sustentabilidade e resiliência urbana:
 
-### 3. Vincular um Sensor IoT a uma Cidade (`POST /api/Sensores`)
-* **Payload de Envio (JSON):**
-```json
-    {
-      "tipo": "Pluviômetro (Sensor de Chuva)",
-      "localizacao": "Zona Leste - Marginais",
-      "cidadeId": 1
-    }
-    ```
+ODS 9: Indústria, Inovação e Infraestrutura.
 
-### 4. Tratamento de Entradas Inválidas (Validação)
-Caso o cliente envie uma requisição incompleta, a aplicação intercepta a chamada usando **Data Annotations** e retorna um erro **`400 Bad Request`** explicativo:
+ODS 11: Cidades e Comunidades Sustentáveis.
 
-* **Exemplo de Resposta de Erro:**
-```json
-    {
-      "type": "[https://tools.ietf.org/html/rfc9110#section-15.5.1](https://tools.ietf.org/html/rfc9110#section-15.5.1)",
-      "title": "One or more validation errors occurred.",
-      "status": 400,
-      "errors": {
-        "Localizacao": [
-          "A localização do sensor é obrigatória."
-        ]
-      }
-    }
-    ```
+ODS 13: Ação Contra a Mudança Global do Clima.
+
 
 ---
 
-## 🌍 Alinhamento com as ODS da ONU
-O OrbitalGuard foi concebido para cumprir com metas globais de sustentabilidade e resiliência urbana:
-* **ODS 9:** Indústria, Inovação e Infraestrutura.
-* **ODS 11:** Cidades e Comunidades Sustentáveis.
-* **ODS 13:** Ação Contra a Mudança Global do Clima.
-💾 3. Salvando e Enviando para o GitHub
-Depois de colar o conteúdo acima e salvar o arquivo no VS Code, abra o seu terminal e execute apenas estes três comandos para atualizar o repositório externo:
+### 💾 3. Atualizando o Repositório no Terminal
 
-Bash
+Depois de colar o conteúdo estritamente limpo acima e **salvar** o arquivo no seu VS Code, abra o terminal e envie a versão definitiva usando estes comandos:
+
+```bash
 git add README.md
-git commit -m "Doc: Limpeza do README e correcao do diagrama Mermaid"
+git commit -m "Doc: Correcao final de caracteres ocultos e sintaxe do Mermaid"
 git push origin main
