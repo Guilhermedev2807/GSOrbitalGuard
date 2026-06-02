@@ -47,3 +47,100 @@ erDiagram
         int CidadeId FK
     }
     TB_OG_CIDADE ||--o{ TB_OG_SENSOR : "possui"
+
+🚀 Instruções para Execução e Acesso
+Pré-requisitos:
+SDK do .NET 9 instalado.
+
+Ferramenta de CLI do Entity Framework Core (dotnet ef).
+
+Passo a Passo para Executar Localmente:
+Clonar o repositório:
+
+Bash
+git clone [https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git](https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git)
+cd GSOrbitalGuard
+Configurar a Connection String:
+Abra o arquivo appsettings.json e configure suas credenciais de acesso ao banco de dados Oracle da FIAP ou SQL Server na propriedade DefaultConnection.
+
+Restaurar dependências e rodar as Migrations:
+
+Bash
+dotnet restore
+dotnet ef database update
+Executar a aplicação:
+
+Bash
+dotnet run
+A API iniciará localmente. O painel do Swagger (Interface de Testes) estará disponível no endereço navegador: https://localhost:7185/swagger (ou na porta correspondente gerada no terminal).
+
+🧪 Exemplos de Teste das Rotas (Massa de Dados)
+Você pode testar as rotas da API diretamente pela interface do Swagger ou utilizando ferramentas como Postman/Insomnia. Abaixo estão as estruturas de dados válidas para teste:
+
+1. Criar uma Nova Cidade (POST /api/Cidades)
+Payload de Envio (JSON):
+
+JSON
+{
+  "nome": "São Paulo",
+  "estado": "SP",
+  "riscoAtual": "Baixo"
+}
+2. Listar Cidades com seus Sensores (GET /api/Cidades)
+Exemplo de Resposta de Sucesso (200 OK):
+
+JSON
+[
+  {
+    "id": 1,
+    "nome": "São Paulo",
+    "estado": "SP",
+    "riscoAtual": "Baixo",
+    "sensores": []
+  }
+]
+3. Vincular um Sensor IoT a uma Cidade (POST /api/Sensores)
+Payload de Envio (JSON):
+
+JSON
+{
+  "tipo": "Pluviômetro (Sensor de Chuva)",
+  "localizacao": "Zona Leste - Marginais",
+  "cidadeId": 1
+}
+4. Tratamento de Entradas Inválidas (Validação)
+Caso o cliente envie uma requisição incompleta (ex: tentar cadastrar um sensor sem informar a localização ou com uma cidade inexistente), a aplicação intercepta a chamada usando Data Annotations e retorna um erro 400 Bad Request explicativo:
+
+Exemplo de Resposta de Erro:
+
+JSON
+{
+  "type": "[https://tools.ietf.org/html/rfc9110#section-15.5.1](https://tools.ietf.org/html/rfc9110#section-15.5.1)",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "Localizacao": [
+      "A localização do sensor é obrigatória."
+    ]
+  }
+}
+🌍 Alinhamento com as ODS da ONU
+O OrbitalGuard foi concebido para cumprir com metas globais de sustentabilidade e resiliência urbana:
+
+ODS 9: Indústria, Inovação e Infraestrutura (Integração de tecnologia espacial e IoT).
+
+ODS 11: Cidades e Comunidades Sustentáveis (Prevenção de mortes urbanas por enchentes).
+
+ODS 13: Ação Contra a Mudança Global do Clima (Mitigação de impactos de desastres severos).
+
+
+---
+
+### 🛠️ Como subir esse arquivo rápido no Git:
+1. No seu VS Code, clique no ícone de "Novo Arquivo" na pasta principal do projeto e nomeie como **`README.md`**.
+2. Cole o texto acima lá dentro e salve.
+3. No terminal do VS Code, digite esses 3 comandos para atualizar o seu GitHub:
+   ```bash
+   git add README.md
+   git commit -m "Doc: Adicionado README completo com diagramas e testes"
+   git push origin main
