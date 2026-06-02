@@ -51,13 +51,14 @@ erDiagram
 
 
 🚀 Instruções para Execução e Acesso
-Pré-requisitos:
-SDK do .NET 9 instalado.
 
-Ferramenta de CLI do Entity Framework Core (dotnet ef).
+### 🔄 Como atualizar no GitHub:
+Depois de corrigir as crases e salvar o arquivo no VS Code, rode os comandos padrão no seu terminal para atualizar a página:
 
-Passo a Passo para Executar Localmente:
-Clonar o repositório:
+```bash
+git add README.md
+git commit -m "Fix: Corrigido fechamento do bloco mermaid no README"
+git push origin main
 
 Bash
 git clone [https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git](https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git)
