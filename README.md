@@ -148,3 +148,12 @@ Após salvar o arquivo com o conteúdo acima no VS Code, execute estes comandos 
 git add README.md
 git commit -m "Doc: Substituindo bloco mermaid por tabelas markdown nativas"
 git push origin main
+
+## 🎥 Artefatos de Apresentação (Entregas Obrigatórias)
+
+Como parte dos critérios de avaliação do portal, abaixo estão os links para as apresentações em vídeo do projeto:
+
+* **Vídeo de Demonstração Completa (Máx. 8 minutos):** [Clique aqui para assistir ao vídeo de demonstração](COLOQUE_O_LINK_DO_SEU_VIDEO_AQUI)
+  > *Nota: Este vídeo apresenta a arquitetura da aplicação funcionando de ponta a ponta, os testes efetuados no Swagger e as validações do sistema.*
+* **Vídeo Pitch (Máx. 3 minutos):** [Clique aqui para assistir ao Pitch](COLOQUE_O_LINK_DO_SEU_PITCH_AQUI)
+  > *Nota: Uma apresentação rápida focada no problema, na solução de mercado do OrbitalGuard e na viabilidade do projeto.*
