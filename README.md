@@ -1,7 +1,7 @@
 # OrbitalGuard 🚀🛰️
 > **"Tecnologia espacial salvando vidas na Terra."**
 
-O **OrbitalGuard** é um sistema inteligente de monitoramento e prevenção de desastres naturais (enchentes, deslizamentos e queimadas). Ele conecta dados meteorológicos de satélites, sensores IoT (ESP32) em tempo real e Inteligência Artificial preditiva para alertar populações e órgãos públicos antes que a catástrofe aconteça.
+O **OrbitalGuard** é um sistema inteligente de monitoramento e prevenção de desastres naturais (enchentes, deslizamentos e queimadas). Ele conecta dados meteorológicos de satélites, sensores IoT em tempo real e Inteligência Artificial preditiva para alertar populações e órgãos públicos antes que a catástrofe aconteça.
 
 Este repositório contém a **Web API desenvolvida em .NET 9**, responsável pelo ecossistema de dados, regras de negócio e persistência em banco de dados relacional.
 
@@ -49,101 +49,98 @@ erDiagram
     TB_OG_CIDADE ||--o{ TB_OG_SENSOR : "possui"
 
 
-
 🚀 Instruções para Execução e Acesso
+Pré-requisitos:
+SDK do .NET 9 instalado.
 
-### 🔄 Como atualizar no GitHub:
-Depois de corrigir as crases e salvar o arquivo no VS Code, rode os comandos padrão no seu terminal para atualizar a página:
+Ferramenta de CLI do Entity Framework Core (dotnet ef).
 
-```bash
-git add README.md
-git commit -m "Fix: Corrigido fechamento do bloco mermaid no README"
-git push origin main
+Passo a Passo para Executar Localmente:
+Clonar o repositório:
 
 Bash
-git clone [https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git](https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git)
-cd GSOrbitalGuard
+   git clone [https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git](https://github.com/Guilherme-De-Andrade-Martini/GSOrbitalGuard.git)
+   cd GSOrbitalGuard
 Configurar a Connection String:
 Abra o arquivo appsettings.json e configure suas credenciais de acesso ao banco de dados Oracle da FIAP ou SQL Server na propriedade DefaultConnection.
 
 Restaurar dependências e rodar as Migrations:
 
 Bash
-dotnet restore
-dotnet ef database update
+   dotnet restore
+   dotnet ef database update
 Executar a aplicação:
 
 Bash
-dotnet run
-A API iniciará localmente. O painel do Swagger (Interface de Testes) estará disponível no endereço navegador: https://localhost:7185/swagger (ou na porta correspondente gerada no terminal).
+   dotnet run
+A API iniciará localmente. O painel do Swagger (Interface de Testes) estará disponível no navegador.
 
 🧪 Exemplos de Teste das Rotas (Massa de Dados)
-Você pode testar as rotas da API diretamente pela interface do Swagger ou utilizando ferramentas como Postman/Insomnia. Abaixo estão as estruturas de dados válidas para teste:
+Você pode testar as rotas da API diretamente pela interface do Swagger ou utilizando ferramentas como Postman/Insomnia.
 
 1. Criar uma Nova Cidade (POST /api/Cidades)
 Payload de Envio (JSON):
 
 JSON
-{
-  "nome": "São Paulo",
-  "estado": "SP",
-  "riscoAtual": "Baixo"
-}
-2. Listar Cidades com seus Sensores (GET /api/Cidades)
-Exemplo de Resposta de Sucesso (200 OK):
+    {
+      "nome": "São Paulo",
+      "estado": "SP",
+      "riscoAtual": "Baixo"
+    }
+    ```
 
-JSON
-[
-  {
-    "id": 1,
-    "nome": "São Paulo",
-    "estado": "SP",
-    "riscoAtual": "Baixo",
-    "sensores": []
-  }
-]
-3. Vincular um Sensor IoT a uma Cidade (POST /api/Sensores)
-Payload de Envio (JSON):
-
-JSON
-{
-  "tipo": "Pluviômetro (Sensor de Chuva)",
-  "localizacao": "Zona Leste - Marginais",
-  "cidadeId": 1
-}
-4. Tratamento de Entradas Inválidas (Validação)
-Caso o cliente envie uma requisição incompleta (ex: tentar cadastrar um sensor sem informar a localização ou com uma cidade inexistente), a aplicação intercepta a chamada usando Data Annotations e retorna um erro 400 Bad Request explicativo:
-
-Exemplo de Resposta de Erro:
-
-JSON
-{
-  "type": "[https://tools.ietf.org/html/rfc9110#section-15.5.1](https://tools.ietf.org/html/rfc9110#section-15.5.1)",
-  "title": "One or more validation errors occurred.",
-  "status": 400,
-  "errors": {
-    "Localizacao": [
-      "A localização do sensor é obrigatória."
+### 2. Listar Cidades com seus Sensores (`GET /api/Cidades`)
+* **Exemplo de Resposta de Sucesso (`200 OK`):**
+```json
+    [
+      {
+        "id": 1,
+        "nome": "São Paulo",
+        "estado": "SP",
+        "riscoAtual": "Baixo",
+        "sensores": []
+      }
     ]
-  }
-}
-🌍 Alinhamento com as ODS da ONU
-O OrbitalGuard foi concebido para cumprir com metas globais de sustentabilidade e resiliência urbana:
+    ```
 
-ODS 9: Indústria, Inovação e Infraestrutura (Integração de tecnologia espacial e IoT).
+### 3. Vincular um Sensor IoT a uma Cidade (`POST /api/Sensores`)
+* **Payload de Envio (JSON):**
+```json
+    {
+      "tipo": "Pluviômetro (Sensor de Chuva)",
+      "localizacao": "Zona Leste - Marginais",
+      "cidadeId": 1
+    }
+    ```
 
-ODS 11: Cidades e Comunidades Sustentáveis (Prevenção de mortes urbanas por enchentes).
+### 4. Tratamento de Entradas Inválidas (Validação)
+Caso o cliente envie uma requisição incompleta, a aplicação intercepta a chamada usando **Data Annotations** e retorna um erro **`400 Bad Request`** explicativo:
 
-ODS 13: Ação Contra a Mudança Global do Clima (Mitigação de impactos de desastres severos).
-
+* **Exemplo de Resposta de Erro:**
+```json
+    {
+      "type": "[https://tools.ietf.org/html/rfc9110#section-15.5.1](https://tools.ietf.org/html/rfc9110#section-15.5.1)",
+      "title": "One or more validation errors occurred.",
+      "status": 400,
+      "errors": {
+        "Localizacao": [
+          "A localização do sensor é obrigatória."
+        ]
+      }
+    }
+    ```
 
 ---
 
-### 🛠️ Como subir esse arquivo rápido no Git:
-1. No seu VS Code, clique no ícone de "Novo Arquivo" na pasta principal do projeto e nomeie como **`README.md`**.
-2. Cole o texto acima lá dentro e salve.
-3. No terminal do VS Code, digite esses 3 comandos para atualizar o seu GitHub:
-   ```bash
-   git add README.md
-   git commit -m "Doc: Adicionado README completo com diagramas e testes"
-   git push origin main
+## 🌍 Alinhamento com as ODS da ONU
+O OrbitalGuard foi concebido para cumprir com metas globais de sustentabilidade e resiliência urbana:
+* **ODS 9:** Indústria, Inovação e Infraestrutura.
+* **ODS 11:** Cidades e Comunidades Sustentáveis.
+* **ODS 13:** Ação Contra a Mudança Global do Clima.
+💾 3. Salvando e Enviando para o GitHub
+Depois de colar o conteúdo acima e salvar o arquivo no VS Code, abra o seu terminal e execute apenas estes três comandos para atualizar o repositório externo:
+
+Bash
+git add README.md
+git commit -m "Doc: Limpeza do README e correcao do diagrama Mermaid"
+git push origin main
