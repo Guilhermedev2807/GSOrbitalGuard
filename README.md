@@ -48,6 +48,8 @@ erDiagram
     }
     TB_OG_CIDADE ||--o{ TB_OG_SENSOR : "possui"
 
+
+
 🚀 Instruções para Execução e Acesso
 Pré-requisitos:
 SDK do .NET 9 instalado.
