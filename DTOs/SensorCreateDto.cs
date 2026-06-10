@@ -11,6 +11,6 @@ namespace OrbitalGuardApi.DTOs
         public string Localizacao { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "O ID da cidade vinculada é obrigatório.")]
-        public int CidadeId { get; set; }
+        public long CidadeId { get; set; }
     }
 }

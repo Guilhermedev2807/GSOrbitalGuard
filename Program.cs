@@ -3,18 +3,22 @@ using OrbitalGuardApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configurar o Contexto do Banco de Dados (Usando SQL Server como exemplo)
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
+// 1. Configuração dos Controllers
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 
-builder.Services.AddControllers();
-
-// Configuração do Swagger/OpenAPI
+// 2. Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection"))); 
 
+// TUDO TEM DE FICAR ACIMA DESTA LINHA:
+var app = builder.Build();
 // Configurar o pipeline de requisições HTTP
 if (app.Environment.IsDevelopment())
 {
