@@ -46,7 +46,7 @@ namespace OrbitalGuard.NETGS.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TB_OG_CIDADE");
+                    b.ToTable("TB_OG_CIDADE", (string)null);
                 });
 
             modelBuilder.Entity("OrbitalGuardApi.Models.Sensor", b =>
@@ -78,7 +78,7 @@ namespace OrbitalGuard.NETGS.Migrations
 
                     b.HasIndex("CidadeId");
 
-                    b.ToTable("TB_OG_SENSOR");
+                    b.ToTable("TB_OG_SENSOR", (string)null);
                 });
 
             modelBuilder.Entity("OrbitalGuardApi.Models.Sensor", b =>
