@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrbitalGuard.NETGS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+764c47afa2d421deb4696225887474d251b9f344")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+68e9e76d2f770f8521e2ad4f8891b63d14b9aec6")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrbitalGuard.NETGS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrbitalGuard.NETGS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
